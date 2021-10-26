@@ -97,8 +97,8 @@ $('body').on('click', '.gerarParcelas', function(){
                             <span class="form-control text-center" style="padding-left:2px;">${numeroparcela}</label>
                         </div>
 
-                        <div class="col-5 col-md-5">
-                            <input type="date" required name="guia[${i}][datavencimento]" class="form-control" value="${dataPagamento.format('DD/MM/YYYY')}">
+                        <div class="col-5 col-md-5" style="display:none">
+                            <input type="date" required name="guia[${i}][datavencimento]" class="form-control" value="${dataPagamento.format('YYYY-MM-DD')}">
                         </div>
 
                         <div class="col-5 col-md-5">
@@ -121,26 +121,6 @@ $('body').on('click', '.gerarParcelas', function(){
         carregando.hide()
     })
 })
-
-function carcula_jusros_venda(pedidovalor, taxa, parcelas){
-    // UTILIZANDO A FÓRMULA
-    var taxa_dividida = nanzero(taxa)/100;//DIVIDE A PORCENTAGEM POR CEM, RETORNANDO VALOR FRACIONÁRIO
-    var taxa_dividida_mais_um = 1+taxa_dividida;//SOMA PORCENTAGEM DIVIDIDA + 1
-    
-    var taxa_multiplicada = Math.pow(taxa_dividida_mais_um, parcelas);//MULTIPLICA A TAXA DIVIDIDA POR ELA MESMO DE ACORDO A QUANTIDADE DE PARCELAS
-   
-    var taxa_multiplicada_vezes_taxa_dividida = (taxa_multiplicada*taxa_dividida);//MULTIPLICA A TAXA MULTIPLICADA POR ELA MESMA A PARDIR DAS PARCELAS E MULTIPLICA PELA TAXA DIVIDIDA POR 100
-
-    var taxa_multiplicada_menos_um = taxa_multiplicada-1;//SUBTRAI A TAXA MULTIPLICADA POR ELE MESMO A PARTIR DAS PARCELAS POR 1
-
-    var divide_taxa_multiplicada_vezes_taxa_dividida_portaxa_multiplicada_menos_um = taxa_multiplicada_vezes_taxa_dividida/taxa_multiplicada_menos_um;
-
-    var valor_parcela = pedidovalor * divide_taxa_multiplicada_vezes_taxa_dividida_portaxa_multiplicada_menos_um;
-
-    pedidovalor = valor_parcela*parcelas;
-
-    return pedidovalor;
-}
 
 function nanzero(x){
     if(x==''){

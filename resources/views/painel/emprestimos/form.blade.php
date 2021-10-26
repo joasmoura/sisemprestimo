@@ -57,7 +57,7 @@
                     </select>
                 </div>
 
-                <input type="hidden" required name="vencimento" id="vencimento" class="form-control" value="{{(isset($editar) ? date('d/m/Y', strtotime($editar->parcelas()->first()->vencimento)) : date('Y-m-d'))}}" placeholder="Data Vencimento">
+                <input type="hidden" required name="vencimento" id="vencimento" class="form-control" value="{{(isset($editar) ? date('d-m-Y', strtotime($editar->parcelas()->first()->vencimento)) : date('Y-m-d'))}}" placeholder="Data Vencimento">
                 {{-- <div class="col-6 col-md-2">
                     <div class="form-group">
                         <label>Data Vencimento</label>
