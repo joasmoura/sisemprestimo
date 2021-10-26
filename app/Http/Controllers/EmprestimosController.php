@@ -100,18 +100,18 @@ class EmprestimosController extends Controller
     {
         $salvo = Emprestimo::create([
             'cliente_id' => $request->cliente_id,
-            'valor' => (float) $request->valor,
-            'valor_total' => (float) $request->valor_total,
+            'valor' => valorBanco($request->valor),
+            'valor_total' => valorBanco($request->valor_total),
             'parcelas' => $request->parcela,
             'status' => '2',
             'corretor_id' => auth()->user()->id,
-            'comissao_corretor' => ((float) $request->valor_total * (float) auth()->user()->comissao)/100,
+            'comissao_corretor' => (valorBanco($request->valor_total) * (float) auth()->user()->comissao)/100,
         ]);
 
         if($salvo){
             foreach($request['guia'] as $parcela){
                 $salvo->parcelas()->create([
-                    'valor' => $parcela['valor'],
+                    'valor' => valorBanco($parcela['valor']),
                     'vencimento' => date('Y-m-d', strtotime($parcela['datavencimento'])),
                     'num' => $parcela['num_parcela'],
                 ]);
@@ -169,9 +169,9 @@ class EmprestimosController extends Controller
 
         if($emprestimo){
             $emprestimo->valor = $request->valor;
-            $emprestimo->valor_total = $request->valor_total;
+            $emprestimo->valor_total = valorBanco($request->valor_total);
             $emprestimo->parcelas = $request->parcela;
-            $emprestimo->comissao_corretor = ((float) $request->valor_total * (float) auth()->user()->comissao)/100;
+            $emprestimo->comissao_corretor = (valorBanco($request->valor_total) * (float) auth()->user()->comissao)/100;
 
             $salvo = $emprestimo->save();
 
@@ -179,7 +179,7 @@ class EmprestimosController extends Controller
                 $emprestimo->parcelas()->delete();
                 foreach($request['guia'] as $parcela){
                     $emprestimo->parcelas()->create([
-                        'valor' => $parcela['valor'],
+                        'valor' => valorBanco($parcela['valor']),
                         'vencimento' => date('Y-m-d', strtotime($parcela['datavencimento'])),
                         'num' => $parcela['num_parcela'],
                     ]);
