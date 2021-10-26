@@ -94,8 +94,8 @@ class JurosController extends Controller
 
         if($taxa){
             $taxa->taxa = $request->taxa;
-            $taxa->valor_inicial = $request->valor_inicial;
-            $taxa->valor_final = $request->valor_final;
+            $taxa->valor_inicial = (float) $request->valor_inicial;
+            $taxa->valor_final = (float) $request->valor_final;
 
             $salvo = $taxa->save();
 
