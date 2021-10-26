@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Str;
 class ClientesController extends Controller
 {
     /**
@@ -57,7 +57,7 @@ class ClientesController extends Controller
             'bairro' => $request->bairro,
             'perfil' => $request->perfil,
             'email' => $request->email,
-            'username' => $request->username,
+            'username' => Str::slug($request->name).time(),
             'password' => Hash::make($request->password),
             'user_id' => auth()->user()->id
         ];

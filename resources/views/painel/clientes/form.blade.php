@@ -77,26 +77,31 @@
 
                 <div class="col-md-12"></div>
 
-                <div class="col-md-4">
+
+                <input  type="hidden" name="username" value="{{(isset($editar) && !empty($editar->username) ? $editar->username : old('username'))}}">
+                {{-- <div class="col-md-4">
                     <div class="form-group">
                         <label>Nome de usuário</label>
                         <input  type="text" name="username" required value="{{(isset($editar) && !empty($editar->username) ? $editar->username : old('username'))}}" class="form-control" placeholder="Nome de usuário">
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="col-md-4">
+                
+                <input  type="hidden" name="email" value="{{(isset($editar) && !empty($editar->email) ? $editar->email : old('email'))}}">
+                {{-- <div class="col-md-4">
                     <div class="form-group">
                         <label>Email</label>
                         <input  type="text" name="email" value="{{(isset($editar) && !empty($editar->email) ? $editar->email : old('email'))}}" class="form-control" placeholder="Email">
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="col-md-4">
+                <input  type="hidden" name="password" value="123456789" class="form-control">
+                {{-- <div class="col-md-4">
                     <div class="form-group">
                         <label>Senha</label>
                         <input  type="password" name="password" {{(!isset($editar) ? 'required' : '')}} value="" class="form-control" placeholder="Senha">
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 

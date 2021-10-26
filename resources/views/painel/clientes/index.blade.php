@@ -49,7 +49,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Nome de Usuário</th>
+                            <th>CPF</th>
                             <th>Endereço</th>
                             <th></th>
                         </tr>
@@ -59,7 +59,7 @@
                         @forelse($clientes as $cliente)
                         <tr>
                             <td>{{$cliente->name}}</td>
-                            <td>{{$cliente->username}}</td>
+                            <td>{{$cliente->cpf}}</td>
                             <td>{{$cliente->endereco}}, {{$cliente->numero}},  {{$cliente->bairro}}</td>
                             <td class="d-flex flex-row justify-items-center">
                                 <a href="{{route('painel.clientes.edit', $cliente->id)}}" class="btn btn-primary btn-sm" title="Editar Cliente"><i class="fa fa-edit"></i></a>
