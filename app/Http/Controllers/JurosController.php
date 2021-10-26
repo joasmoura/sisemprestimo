@@ -43,9 +43,9 @@ class JurosController extends Controller
     public function store(Request $request)
     {
         $salvo = Juro::create([
-            'taxa' => $request->taxa,
-            'valor_inicial' => $request->valor_inicial,
-            'valor_final' => $request->valor_final,
+            'taxa' => (float) $request->taxa,
+            'valor_inicial' => (float) $request->valor_inicial,
+            'valor_final' => (float) $request->valor_final,
         ]);
 
         if ($salvo){
@@ -93,7 +93,7 @@ class JurosController extends Controller
         $taxa = Juro::find($id);
 
         if($taxa){
-            $taxa->taxa = $request->taxa;
+            $taxa->taxa = (float) $request->taxa;
             $taxa->valor_inicial = (float) $request->valor_inicial;
             $taxa->valor_final = (float) $request->valor_final;
 
