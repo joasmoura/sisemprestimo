@@ -70,7 +70,9 @@
                             <td></td>
                         </tr>
                     @empty
-
+                        <tr>
+                            <td colspan="8">Sem dados para consulta até o momento</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
