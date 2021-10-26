@@ -33,8 +33,9 @@ Route::name('painel.')->middleware('auth')->prefix('painel')->group(function () 
     Route::get('/juros/taxas', [JurosController::class, 'taxas']);
     Route::resource('/juros', JurosController::class);
 
+    Route::get('/emprestimos/extrato/{id}', [EmprestimosController::class, 'extrato'])->name('emprestimos.extrato');
     Route::get('/emprestimos/baixa/{id}', [EmprestimosController::class, 'baixa'])->name('emprestimos.baixa');
-    Route::get('/emprestimos/{id}/baixar', [EmprestimosController::class, 'criarBaixa'])->name('emprestimos.criarBaixa');
+    Route::post('/emprestimos/{id}/baixar', [EmprestimosController::class, 'criarBaixa'])->name('emprestimos.criarBaixa');
     Route::get('/emprestimos/selecionar-cliente', [EmprestimosController::class, 'selecionarCliente'])->name('emprestimos.selecionar');
     Route::get('/emprestimos/{id}/form', [EmprestimosController::class, 'form'])->name('emprestimos.form');
     Route::resource('/emprestimos', EmprestimosController::class);

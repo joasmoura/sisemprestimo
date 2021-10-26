@@ -14,8 +14,13 @@
 @section('conteudo')
     <div class="card card-default">
         <div class="card-header">
-            <form method="GET">
-                <input type="text" required name="nome" value="{{(isset($nome) ? $nome : '')}}" class="form-control float-right" placeholder="Cliente">
+            <form method="GET" class="d-flex flex-row">
+                <div class="input-group input-group-sm" >
+                    <input type="text" class="form-control" required name="nome" value="{{(isset($nome) ? $nome : '')}}"  placeholder="Cliente">
+                    <span class="input-group-append">
+                        <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i> Buscar</button>
+                    </span>
+                </div>
             </form>
         </div>
 

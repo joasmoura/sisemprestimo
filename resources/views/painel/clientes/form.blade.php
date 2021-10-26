@@ -111,7 +111,7 @@
                                 <option value=""></option>
 
                                 @forelse($corretores as $corretor)
-                                    <option value="{{$corretor->id}}">{{$corretor->name}}</option>
+                                    <option value="{{$corretor->id}}" {{(isset($editar) && $corretor->id === $editar->user_id ? 'selected' : '')}}>{{$corretor->name}}</option>
                                 @empty
                                 @endforelse
                             </select>

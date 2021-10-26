@@ -39,8 +39,11 @@
             </div>
 
             <div class="card-body">
-              <a href="{{route('painel.emprestimos.baixa', $emprestimo->id)}}" class="btn btn-block btn-success"><i class="fa fa-arrow-down"></i> Baixa</a>
-              <a href="{{route('painel.emprestimos.edit', $emprestimo->id)}}" class="btn btn-block btn-default"><i class="fa fa-edit"></i> Editar</a>
+              <a href="{{route('painel.emprestimos.baixa', $emprestimo->id)}}" class="btn btn-block btn-success"><i class="fa fa-money-bill-wave"></i> Pagar</a>
+              <a href="{{route('painel.emprestimos.extrato', $emprestimo->id)}}" class="btn btn-block btn-default"><i class="fa fa-receipt"></i> Extrato</a>
+              @if(auth()->user()->perfil === 'admin')
+                {{-- <a href="{{route('painel.emprestimos.edit', $emprestimo->id)}}" class="btn btn-block btn-default"><i class="fa fa-edit"></i> Editar</a> --}}
+              @endif
             </div>
 
             <div class="card-footer">

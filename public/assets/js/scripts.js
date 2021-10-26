@@ -158,6 +158,13 @@ $('body').on('submit', 'form[name="formEmprestimo"]',function(){
     }
 })
 
+$('body').on('click', '.modalBaixa', function(e){
+    e.preventDefault()
+    const action = $(this).attr('href')
+    $('form[name="form-baixa"]').attr('action',action)
+    $('#modal-default').modal('show')
+})
+
 maskData()
 function maskData(){
     $('.data').mask('99/99/9999')

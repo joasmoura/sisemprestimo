@@ -52,7 +52,7 @@
                                 
                                 <div class="col-1 co-md-1">
                                     @if(!$parcela->baixa)
-                                        <a href="{{route('painel.emprestimos.criarBaixa', $parcela->id)}}" class="btn btn-primary" title="Dar baixa"><i class="fa fa-arrow-down"></i></a>
+                                        <a href="{{route('painel.emprestimos.criarBaixa', $parcela->id)}}" class="btn btn-primary modalBaixa" title="Dar baixa"><i class="fa fa-arrow-down"></i></a>
                                     @endif
                                 </div>
                             </div>
@@ -76,4 +76,31 @@
         </div>
     </div>
 </div>
+
+<form name="form-baixa" action="" method="POST">
+    <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Data pagamento</h4>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            </div>
+
+            <div class="modal-body">
+                @csrf
+            <input type="date" value="{{date('Y-m-d')}}" name="created_at" class="form-control">
+            </div>
+
+            <div class="modal-footer justify-content-between">
+            <button type="submit" class="btn btn-success">Confirmar</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</form>
 @stop

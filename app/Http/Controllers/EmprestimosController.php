@@ -67,13 +67,13 @@ class EmprestimosController extends Controller
         }
     }
 
-    public function criarBaixa($id){
+    public function criarBaixa($id, Request $request){
         $parcela = Parcelas::find($id);
-
         if($parcela){
             $salvo = $parcela->baixa()->create([
                 'valor' => $parcela->valor,
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'created_at' => $request->created_at. ' '.date('H:i:s')
             ]);
 
             if($salvo){
@@ -81,6 +81,17 @@ class EmprestimosController extends Controller
             }
         }else{
             return redirect()->back();
+        }
+    }
+
+    public function extrato($id){
+        $emprestimo = Emprestimo::with('parcelas')->find($id);
+
+        if($emprestimo){
+            $parcelas = $emprestimo->parcelas()->with('baixa')->get();
+            return View('painel.emprestimos.extrato', compact('emprestimo', 'parcelas'));
+        }else{
+            return redirect()->route('painel.emprestimos.index');
         }
     }
 

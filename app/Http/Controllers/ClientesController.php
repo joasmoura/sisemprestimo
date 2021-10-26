@@ -98,10 +98,18 @@ class ClientesController extends Controller
     public function edit($id)
     {
         $editar = User::find($id);
+        $user = auth()->user();
 
         if($editar){
-            return View('painel.clientes.form', compact('editar'));
+            if($user->perfil === 'admin'){
+                $corretores = User::where('perfil', 'corretor')->get();
+                return View('painel.clientes.form', compact('editar','corretores'));
+            }else{
+                return View('painel.clientes.form', compact('editar'));
+            }
         }
+
+
     }
 
     /**
