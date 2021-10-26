@@ -49,6 +49,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>Corretor</th>
                             <th>CPF</th>
                             <th>Endereço</th>
                             <th></th>
@@ -59,6 +60,7 @@
                         @forelse($clientes as $cliente)
                         <tr>
                             <td>{{$cliente->name}}</td>
+                            <td>{{$cliente->corretor->name}}</td>
                             <td>{{$cliente->cpf}}</td>
                             <td>{{$cliente->endereco}}, {{$cliente->numero}},  {{$cliente->bairro}}</td>
                             <td class="d-flex flex-row justify-items-center">

@@ -13,7 +13,7 @@ class ClientesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
 
@@ -21,7 +21,8 @@ class ClientesController extends Controller
             return redirect()->route('painel.index');
         }
 
-        $clientes = User::where('perfil', 'cliente')->where(function($query) use($user){
+        $clientes = User::with('corretor')->where(function($query) use($user){
+            $query->where('perfil', 'cliente');
             if($user->perfil === 'corretor'){
                 $query->where('user_id', $user->id);
             }
@@ -37,7 +38,14 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        return view('painel.clientes.form');
+        $user = auth()->user();
+
+        if($user->perfil === 'admin'){
+            $corretores = User::where('perfil', 'corretor')->get();
+            return view('painel.clientes.form', compact('corretores'));
+        }else{
+            return view('painel.clientes.form');
+        }
     }
 
     /**
@@ -48,6 +56,7 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
         $dados = [
             'name' => $request->name,
             'cpf' => $request->cpf,
@@ -59,7 +68,7 @@ class ClientesController extends Controller
             'email' => $request->email,
             'username' => Str::slug($request->name).time(),
             'password' => Hash::make($request->password),
-            'user_id' => auth()->user()->id
+            'user_id' => ($user->perfil === 'admin' ? $request->user_id : auth()->user()->id)
         ];
 
         $salvo = User::create($dados);

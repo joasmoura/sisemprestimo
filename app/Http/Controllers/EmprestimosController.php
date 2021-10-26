@@ -33,10 +33,14 @@ class EmprestimosController extends Controller
 
     public function selecionarCliente(Request $request){
         $nome = $request->nome;
+        $user = auth()->user();
         $clientes = [];
         if(!empty($nome)){
-            $clientes = User::where('perfil', 'cliente')->where(function($query) use($request) {
+            $clientes = User::where('perfil', 'cliente')->where(function($query) use($request, $user) {
                 $query->where('name', 'like', '%'.$request->nome.'%');
+                if($user->perfil === 'corretor'){
+                    $query->where('user_id', $user->id);
+                }
             })->paginate();
         }
         return View('painel.emprestimos.clientes', compact('clientes', 'nome'));

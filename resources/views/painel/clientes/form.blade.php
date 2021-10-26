@@ -102,6 +102,22 @@
                         <input  type="password" name="password" {{(!isset($editar) ? 'required' : '')}} value="" class="form-control" placeholder="Senha">
                     </div>
                 </div> --}}
+
+                @if(auth()->user()->perfil === 'admin')
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Corretor</label>
+                            <select name="user_id" class="form-control">
+                                <option value=""></option>
+
+                                @forelse($corretores as $corretor)
+                                    <option value="{{$corretor->id}}">{{$corretor->name}}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
 

@@ -51,6 +51,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function corretor(){
+        return $this->hasOne(User::class,'id', 'user_id');
+    }
+
     public function emprestimos(){
         return $this->hasMany(Emprestimo::class, 'corretor_id','id');
     }
