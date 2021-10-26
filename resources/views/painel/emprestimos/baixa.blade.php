@@ -43,10 +43,6 @@
                                 </div>
         
                                 <div class="col-5 col-md-5">
-                                    <span class="form-control">{{date('d/m/Y', strtotime($parcela->vencimento))}}</span>
-                                </div>
-        
-                                <div class="col-5 col-md-5">
                                     <span class="form-control" >{{inteiroParaReal($parcela->valor)}}</span>
                                 </div>
                                 
