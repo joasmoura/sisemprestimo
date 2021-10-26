@@ -114,6 +114,7 @@ class ClientesController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
+        $logado = auth()->user();
 
         if($user){            
             $user->name = $request->name;
@@ -125,6 +126,10 @@ class ClientesController extends Controller
             $user->perfil = $request->perfil;
             $user->email = $request->email;
             $user->username = $request->username;
+
+            if($logado->perfil === 'admin'){
+                $user->user_id = $request->user_id;
+            }
 
             if(!empty($request->password)){
                 $user->password = Hash::make($request->password);            
