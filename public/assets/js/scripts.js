@@ -41,8 +41,6 @@ $('body').on('click', '.gerarParcelas', function(){
 
             valorTaxa = valor*(juros.taxa/100)
             valor +=  valorTaxa
-
-            alert(valorTaxa)
             
             if(valor === '' || parseFloat(valor) === 0){
                 alert('Digite o valor do emprestimo!')
