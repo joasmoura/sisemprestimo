@@ -35,26 +35,47 @@
                 </thead>
 
                 <tbody>
+                    @php
+                        $total_emprestado = 0;
+                        $total_aposta = 0;
+                        $total_juros = 0;
+                        $total_recebido = 0;
+                        $total_comissao = 0;
+                        $total_em_aberto = 0;
+                    @endphp
+
                     @forelse($corretores as $corretor)
                         @php
                             $valor_aposta = 0;
-                            $total_emprestado = 0;
-                            $total_recebido = 0;
-                            $total_comissao = 0;
+                            $valor_emprestado = 0;
+                            $valor_recebido = 0;
+                            $valor_comissao = 0;
+                            $valor_juros = 0;
+                            $valor_em_aberto = 0;
 
                             $emprestimos = $corretor->emprestimos()->get();
                             if($emprestimos->first()){
                                 foreach($emprestimos as $emprestimo){
-                                    $total_emprestado += $emprestimo->valor_total;
-                                    $total_comissao += $emprestimo->comissao_corretor;
+                                    $valor_emprestado += $emprestimo->valor_total;
+                                    $valor_comissao += $emprestimo->comissao_corretor;
                                     $valor_aposta += $emprestimo->valor;
+                                    $valor_juros = $valor_emprestado-$valor_aposta;
                                     
                                     $parcelas = $emprestimo->parcelas()->get();
                                     if($parcelas->first()){
                                         foreach($parcelas as $parcela){
-                                            $total_recebido += $parcela->baixa()->sum('valor');
+                                            $valor_recebido += $parcela->baixa()->sum('valor');
                                         }
                                     }
+
+                                    $valor_em_aberto = $valor_emprestado-$valor_recebido;
+
+                                    $total_emprestado += $valor_emprestado;
+                                    $total_aposta += $valor_aposta;
+                                    $total_juros += $valor_juros;
+                                    $total_recebido += $valor_recebido;
+                                    $total_comissao += $valor_comissao;
+                                    $total_em_aberto += $valor_em_aberto;
                                 }
                             }
                         @endphp
@@ -62,11 +83,11 @@
                         <tr>
                             <td>{{$corretor->name}}</td>
                             <td>R$ {{inteiroParaReal($valor_aposta)}}</td>
-                            <td>R$ {{inteiroParaReal($total_emprestado)}}</td>
-                            <td>R$ {{inteiroParaReal($total_emprestado-$valor_aposta)}}</td>
-                            <td>R$ {{inteiroParaReal($total_recebido)}}</td>
-                            <td>R$ {{inteiroParaReal($total_comissao)}}</td>
-                            <td>R$ {{inteiroParaReal($total_emprestado-$total_recebido)}}</td>
+                            <td>R$ {{inteiroParaReal($valor_emprestado)}}</td>
+                            <td>R$ {{inteiroParaReal($valor_juros)}}</td>
+                            <td>R$ {{inteiroParaReal($valor_recebido)}}</td>
+                            <td>R$ {{inteiroParaReal($valor_comissao)}}</td>
+                            <td>R$ {{inteiroParaReal($valor_em_aberto)}}</td>
                             <td></td>
                         </tr>
                     @empty
@@ -74,6 +95,17 @@
                             <td colspan="8">Sem dados para consulta até o momento</td>
                         </tr>
                     @endforelse
+
+                    <tr>
+                        <td><b>TOTAIS</b></td>
+                        <td><b>R$ {{inteiroParaReal($total_aposta)}}</b></td>
+                        <td><b>R$ {{inteiroParaReal($total_emprestado)}}</b></td>
+                        <td><b>R$ {{inteiroParaReal($total_juros)}}</b></td>
+                        <td><b>R$ {{inteiroParaReal($total_recebido)}}</b></td>
+                        <td><b>R$ {{inteiroParaReal($total_comissao)}}</b></td>
+                        <td><b>R$ {{inteiroParaReal($total_em_aberto)}}</b></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

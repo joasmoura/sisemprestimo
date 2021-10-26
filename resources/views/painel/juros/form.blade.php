@@ -36,7 +36,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Taxa</label>
-                        <input  type="text" name="taxa" required value="{{(isset($editar)  && !empty($editar->taxa) ? $editar->taxa : old('taxa'))}}" class="form-control pencent" placeholder="Taxa">
+                        <input  type="number" name="taxa" min="1" max="100" required value="{{(isset($editar)  && !empty($editar->taxa) ? $editar->taxa : old('taxa'))}}" class="form-control" placeholder="Taxa">
                     </div>
                 </div>
 
