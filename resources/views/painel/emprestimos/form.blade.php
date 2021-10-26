@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-md-2">
                     <label>Parcelamento</label>
                     <select name="parcela" class="form-control" required>
                         <option value="">Selecione a parcela</option>
@@ -57,12 +57,13 @@
                     </select>
                 </div>
 
-                <div class="col-6 col-md-3">
+                <input type="hidden" required name="vencimento" id="vencimento" class="form-control" value="{{(isset($editar) ? date('d/m/Y', strtotime($editar->parcelas()->first()->vencimento)) : date('Y-m-d'))}}" placeholder="Data Vencimento">
+                {{-- <div class="col-6 col-md-2">
                     <div class="form-group">
-                        <label>Vencimento</label>
-                        <input type="text" required name="vencimento" class="form-control data" value="{{(isset($editar) ? date('d/m/Y', strtotime($editar->parcelas()->first()->vencimento)) : '')}}" placeholder="Vencimento">
+                        <label>Data Vencimento</label>
+                        <input type="hidden" required name="vencimento" id="vencimento" class="form-control" value="{{(isset($editar) ? date('d/m/Y', strtotime($editar->parcelas()->first()->vencimento)) : date('Y-m-d'))}}" placeholder="Data Vencimento">
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="col-md-2 py-2">
                     <label><br><br></label>
@@ -84,7 +85,7 @@
                                     </div>
             
                                     <div class="col-5 col-md-5">
-                                        <input type="text" name="guia[{{$parcela->num}}][datavencimento]" class="form-control data" value="{{date('d/m/Y', strtotime($parcela->vencimento))}}">
+                                        <input type="text" required name="guia[{{$parcela->num}}][datavencimento]" class="form-control data" value="{{date('d/m/Y', strtotime($parcela->vencimento))}}">
                                     </div>
             
                                     <div class="col-5 col-md-5">

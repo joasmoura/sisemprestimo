@@ -39,7 +39,10 @@ $('body').on('click', '.gerarParcelas', function(){
                 return false
             }
 
-            valor = carcula_jusros_venda(valor, juros.taxa, parseInt(parcelas))
+            valorTaxa = valor*(juros.taxa/100)
+            valor +=  valorTaxa
+
+            alert(valorTaxa)
             
             if(valor === '' || parseFloat(valor) === 0){
                 alert('Digite o valor do emprestimo!')
@@ -52,9 +55,9 @@ $('body').on('click', '.gerarParcelas', function(){
                 return false
             }
 
-            vencimento = vencimento.split('/');
-            var mes = parseInt(vencimento[1]);
-            vencimento = vencimento[2]+'-'+vencimento[1]+'-'+vencimento[0];
+            venc = vencimento.split('-');
+            var mes = parseInt(venc[1]);
+            // vencimento = vencimento[2]+'-'+vencimento[1]+'-'+vencimento[0];
 
             let total_de_parcelas = 0
             let total_parcelado = 0
@@ -97,7 +100,7 @@ $('body').on('click', '.gerarParcelas', function(){
                         </div>
 
                         <div class="col-5 col-md-5">
-                            <input type="text" name="guia[${i}][datavencimento]" class="form-control data" value="${dataPagamento.format('DD/MM/YYYY')}">
+                            <input type="date" required name="guia[${i}][datavencimento]" class="form-control" value="${dataPagamento.format('DD/MM/YYYY')}">
                         </div>
 
                         <div class="col-5 col-md-5">
@@ -127,8 +130,7 @@ function carcula_jusros_venda(pedidovalor, taxa, parcelas){
     var taxa_dividida_mais_um = 1+taxa_dividida;//SOMA PORCENTAGEM DIVIDIDA + 1
     
     var taxa_multiplicada = Math.pow(taxa_dividida_mais_um, parcelas);//MULTIPLICA A TAXA DIVIDIDA POR ELA MESMO DE ACORDO A QUANTIDADE DE PARCELAS
-    console.log(taxa)
-
+   
     var taxa_multiplicada_vezes_taxa_dividida = (taxa_multiplicada*taxa_dividida);//MULTIPLICA A TAXA MULTIPLICADA POR ELA MESMA A PARDIR DAS PARCELAS E MULTIPLICA PELA TAXA DIVIDIDA POR 100
 
     var taxa_multiplicada_menos_um = taxa_multiplicada-1;//SUBTRAI A TAXA MULTIPLICADA POR ELE MESMO A PARTIR DAS PARCELAS POR 1
