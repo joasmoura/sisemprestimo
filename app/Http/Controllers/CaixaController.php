@@ -26,7 +26,7 @@ class CaixaController extends Controller
             }
             $query->where('status', '1');
         })->with('emprestimos')->paginate(15);
-        return View('painel.caixa.index', compact('corretores'));
+        return View('painel.Caixa.index', compact('corretores'));
     }
 
     /**
