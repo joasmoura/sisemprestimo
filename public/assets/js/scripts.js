@@ -25,7 +25,7 @@ $('body').on('click', '.gerarParcelas', function(){
     const input_total = $('input[name="valor_total"]')
     input_total.val(0)
 
-    let valor = parseFloat($('input[name="valor"]').val())
+    let valor = parseFloat($('input[name="valor"]').val().replace('.','').replace(',','.'))
     const parcelas = $('select[name="parcela"]').val()
     let vencimento = $('input[name="vencimento"]').val()
 

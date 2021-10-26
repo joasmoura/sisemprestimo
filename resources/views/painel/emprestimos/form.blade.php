@@ -51,7 +51,7 @@
                     <label>Parcelamento</label>
                     <select name="parcela" class="form-control" required>
                         <option value="">Selecione a parcela</option>
-                        @for($i = 1; $i <= 20; $i++)
+                        @for($i = 1; $i <= 24; $i++)
                             <option value="{{$i}}" {{(isset($editar) && $editar->parcelas === $i ? 'selected' : '')}}>{{$i}}</option>
                         @endfor
                     </select>
