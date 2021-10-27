@@ -20,8 +20,8 @@ class PainelController extends Controller
         $emprestimosHoje = 0;
         $entradasHoje = 0;
         if(auth()->user()->perfil =='admin'){
-            $emprestimosHoje = Emprestimo::whereDate('created_at', date('Y-m-d'))->sum('valor_total');
-            $entradasHoje = Baixa::whereDate('created_at', date('Y-m-d'))->sum('valor');
+            $emprestimosHoje = Emprestimo::sum('valor_total');
+            $entradasHoje = Baixa::sum('valor');
         }else{
             $emprestimos = $user->emprestimos()->with('parcelas')->get();
 
