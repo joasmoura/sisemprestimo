@@ -72,7 +72,7 @@
                 <div class="inner">
                     <h3><sup style="font-size: 20px">R$</sup>{{inteiroParaReal($emprestimosHoje)}}</h3>
 
-                    <p>Emprestimos de Hoje</p>
+                    <p>Valor na Rua</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-cash"></i>
@@ -89,7 +89,7 @@
                 <div class="inner">
                     <h3><sup style="font-size: 20px">R$</sup>{{inteiroParaReal($entradasHoje)}}</h3>
 
-                    <p>Entradas de Hoje</p>
+                    <p>Valor Recebido</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-cash"></i>
