@@ -70,13 +70,13 @@
 
                                     $valor_em_aberto = $valor_emprestado-$valor_recebido;
 
-                                    $total_emprestado += $valor_emprestado;
-                                    $total_aposta += $valor_aposta;
-                                    $total_juros += $valor_juros;
-                                    $total_recebido += $valor_recebido;
-                                    $total_comissao += $valor_comissao;
-                                    $total_em_aberto += $valor_em_aberto;
                                 }
+                                $total_emprestado += $valor_emprestado;
+                                $total_aposta += $valor_aposta;
+                                $total_juros += $valor_juros;
+                                $total_recebido += $valor_recebido;
+                                $total_comissao += $valor_comissao;
+                                $total_em_aberto += $valor_em_aberto;
                             }
                         @endphp
 
