@@ -66,7 +66,7 @@
 
     <div class="row">
         @if(isset($emprestimosHoje))
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-3 col-12">
                 <!-- small box -->
                 <div class="small-box bg-info">
                 <div class="inner">
@@ -83,7 +83,7 @@
         @endif
 
         @if(isset($entradasHoje))
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-3 col-12">
                 <!-- small box -->
                 <div class="small-box bg-success">
                 <div class="inner">
