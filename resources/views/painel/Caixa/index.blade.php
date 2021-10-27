@@ -96,16 +96,18 @@
                         </tr>
                     @endforelse
 
-                    <tr>
-                        <td><b>TOTAIS</b></td>
-                        <td><b>R$ {{inteiroParaReal($total_aposta)}}</b></td>
-                        <td><b>R$ {{inteiroParaReal($total_emprestado)}}</b></td>
-                        <td><b>R$ {{inteiroParaReal($total_juros)}}</b></td>
-                        <td><b>R$ {{inteiroParaReal($total_recebido)}}</b></td>
-                        <td><b>R$ {{inteiroParaReal($total_comissao)}}</b></td>
-                        <td><b>R$ {{inteiroParaReal($total_em_aberto)}}</b></td>
-                        <td></td>
-                    </tr>
+                    @if(auth()->user()->perfil === 'admin')
+                        <tr>
+                            <td><b>TOTAIS</b></td>
+                            <td><b>R$ {{inteiroParaReal($total_aposta)}}</b></td>
+                            <td><b>R$ {{inteiroParaReal($total_emprestado)}}</b></td>
+                            <td><b>R$ {{inteiroParaReal($total_juros)}}</b></td>
+                            <td><b>R$ {{inteiroParaReal($total_recebido)}}</b></td>
+                            <td><b>R$ {{inteiroParaReal($total_comissao)}}</b></td>
+                            <td><b>R$ {{inteiroParaReal($total_em_aberto)}}</b></td>
+                            <td></td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>
