@@ -143,6 +143,8 @@
         <!-- AdminLTE App -->
         <script src="{{asset('assets/js/adminlte.js')}}"></script>
         <script src="{{asset('assets/js/scripts.js')}}"></script>
+
+        @yield('script')
     </body>
 </html>
 

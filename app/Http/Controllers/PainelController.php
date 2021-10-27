@@ -17,8 +17,29 @@ class PainelController extends Controller
         }
 
 
-        $entradasHoje = Baixa::whereDate('created_at', date('Y-m-d'))->sum('valor');
-        $emprestimosHoje = Emprestimo::whereDate('created_at', date('Y-m-d'))->sum('valor_total');
+        $emprestimosHoje = 0;
+        $entradasHoje = 0;
+        if(auth()->user()->perfil =='admin'){
+            $emprestimosHoje = Emprestimo::whereDate('created_at', date('Y-m-d'))->sum('valor_total');
+            $entradasHoje = Baixa::whereDate('created_at', date('Y-m-d'))->sum('valor');
+        }else{
+            $emprestimos = $user->emprestimos()->with('parcelas')->get();
+
+            if($emprestimos->first()){
+                foreach($emprestimos as $em){
+                    $emprestimosHoje += $em->valor_total;
+                    $parcelas = $em->parcelas()->get();
+
+                    if($parcelas){
+                        foreach($parcelas as $p){
+                            if($p->baixa){
+                                $entradasHoje += $p->baixa->valor;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         return View('painel.index',compact('entradasHoje', 'emprestimosHoje'));
     }
