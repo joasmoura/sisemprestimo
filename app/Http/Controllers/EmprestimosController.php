@@ -26,7 +26,7 @@ class EmprestimosController extends Controller
             if($user->perfil === 'corretor'){
                 $query->where('corretor_id', $user->id);
             }
-        })->paginate(15);
+        })->orderBy('created_at', 'desc')->paginate(15);
 
         return View('painel.emprestimos.index', compact('emprestimos'));
     }
