@@ -26,14 +26,14 @@ class CaixaController extends Controller
             }
             $query->where('status', '1');
         })->with('emprestimos')->paginate(15);
-        return View('painel.caixa.index', compact('corretores'));
+        return View('painel.Caixa.index', compact('corretores'));
     }
 
     public function retirada($id){
         $corretor = User::find($id);
 
         if($corretor){
-            return View('painel.caixa.retirada', compact('corretor'));
+            return View('painel.Caixa.retirada', compact('corretor'));
         }else{
             return redirect()->back();
         }
