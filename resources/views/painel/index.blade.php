@@ -63,4 +63,41 @@
             </div>
         </div>
     @endif
+
+    <div class="row">
+        @if(isset($emprestimosHoje))
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                <div class="inner">
+                    <h3><sup style="font-size: 20px">R$</sup>{{inteiroParaReal($emprestimosHoje)}}</h3>
+
+                    <p>Emprestimos de Hoje</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-cash"></i>
+                </div>
+                <a href="{{route('painel.emprestimos.index')}}" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        @endif
+
+        @if(isset($entradasHoje))
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                <div class="inner">
+                    <h3><sup style="font-size: 20px">R$</sup>{{inteiroParaReal($entradasHoje)}}</h3>
+
+                    <p>Entradas de Hoje</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-cash"></i>
+                </div>
+                <a href="{{route('painel.caixa.index')}}" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        @endif
+
+    </div>
 @stop

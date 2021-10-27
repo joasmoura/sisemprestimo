@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Baixa;
+use App\Models\Emprestimo;
 use Illuminate\Http\Request;
 
 class PainelController extends Controller
@@ -13,6 +15,11 @@ class PainelController extends Controller
             $emprestimos_cliente = $user->emprestimos_cliente()->paginate(15);
             return View('painel.index', compact('emprestimos_cliente'));
         }
-        return View('painel.index');
+
+
+        $entradasHoje = Baixa::whereDate('created_at', date('Y-m-d'))->sum('valor');
+        $emprestimosHoje = Emprestimo::whereDate('created_at', date('Y-m-d'))->sum('valor_total');
+
+        return View('painel.index',compact('entradasHoje', 'emprestimosHoje'));
     }
 }
