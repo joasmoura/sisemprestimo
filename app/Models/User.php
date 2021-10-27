@@ -62,4 +62,8 @@ class User extends Authenticatable
     public function emprestimos_cliente(){
         return $this->hasMany(Emprestimo::class,'cliente_id', 'id');
     }
+
+    public function retiradas(){
+        return $this->hasMany(Retirada::class,'corretor_id', 'id');
+    }
 }

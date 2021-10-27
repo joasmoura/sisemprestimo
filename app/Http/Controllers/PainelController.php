@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Baixa;
 use App\Models\Emprestimo;
+use App\Models\Retirada;
 use Illuminate\Http\Request;
 
 class PainelController extends Controller
@@ -22,9 +23,10 @@ class PainelController extends Controller
         if(auth()->user()->perfil =='admin'){
             $emprestimosHoje = Emprestimo::sum('valor_total');
             $entradasHoje = Baixa::sum('valor');
+            $retiradasHoje = Retirada::sum('valor');
         }else{
             $emprestimos = $user->emprestimos()->with('parcelas')->get();
-
+            $retiradasHoje = $user->retiradas()->sum('valor');
             if($emprestimos->first()){
                 foreach($emprestimos as $em){
                     $emprestimosHoje += $em->valor_total;
@@ -41,6 +43,6 @@ class PainelController extends Controller
             }
         }
 
-        return View('painel.index',compact('entradasHoje', 'emprestimosHoje'));
+        return View('painel.index',compact('entradasHoje', 'emprestimosHoje', 'retiradasHoje'));
     }
 }

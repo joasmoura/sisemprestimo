@@ -98,6 +98,23 @@
                 </div>
             </div>
         @endif
+
+        @if(isset($retiradasHoje))
+            <div class="col-lg-3 col-12">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3><sup style="font-size: 20px">R$</sup>{{inteiroParaReal($retiradasHoje)}}</h3>
+
+                    <p>Valor Retiradas</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-cash"></i>
+                </div>
+                <a href="{{route('painel.caixa.index')}}" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        @endif
         
     </div>
 @stop

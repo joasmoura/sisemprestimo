@@ -29,6 +29,32 @@ class CaixaController extends Controller
         return View('painel.Caixa.index', compact('corretores'));
     }
 
+    public function retirada($id){
+        $corretor = User::find($id);
+
+        if($corretor){
+            return View('painel.caixa.retirada', compact('corretor'));
+        }else{
+            return redirect()->back();
+        }
+    }
+
+    public function confirmarRetirada($id, Request $request){
+        $corretor = User::find($id);
+
+        if($corretor){
+            $salvo = $corretor->retiradas()->create([
+                'valor' => valorBanco($request->valor)
+            ]);
+
+            if($salvo){
+                return redirect()->route('painel.caixa.index')->with('salvo', 'Retirada registrada com sucesso!');
+            }
+        }else{
+            return redirect()->back();
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -43,7 +43,10 @@ Route::name('painel.')->middleware('auth')->prefix('painel')->group(function () 
     Route::get('/emprestimos/{id}/form', [EmprestimosController::class, 'form'])->name('emprestimos.form');
     Route::resource('/emprestimos', EmprestimosController::class);
 
+    Route::get('/caixa/retirada/{id}', [CaixaController::class, 'retirada'])->name('caixa.retirada');
+    Route::post('/caixa/confirmarRetirada/{id}', [CaixaController::class, 'confirmarRetirada'])->name('caixa.confirmarRetirada');
     Route::resource('/caixa', CaixaController::class);
+
     Route::resource('/baixa', BaixaController::class);
 });
 

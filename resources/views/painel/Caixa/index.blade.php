@@ -8,6 +8,12 @@
 
 @section('conteudo')
 
+@if (session('salvo'))
+    <div class="alert alert-success">
+        {{ session('salvo') }}
+    </div>
+@endif
+
 <div class="card card-default">
     <div class="card-header">
         <h3 class="card-title">
@@ -30,6 +36,7 @@
                         <th>Valor recebido</th>
                         <th>Comissão corretor</th>
                         <th>Valor em aberto</th>
+                        <th>Retiradas</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -42,6 +49,7 @@
                         $total_recebido = 0;
                         $total_comissao = 0;
                         $total_em_aberto = 0;
+                        $total_retirada = 0;
                     @endphp
 
                     @forelse($corretores as $corretor)
@@ -52,8 +60,11 @@
                             $valor_comissao = 0;
                             $valor_juros = 0;
                             $valor_em_aberto = 0;
+                            $valor_retirada = 0;
 
                             $emprestimos = $corretor->emprestimos()->get();
+                            $valor_retirada = $corretor->retiradas()->sum('valor');
+                            $total_retirada += $valor_retirada;
                             if($emprestimos->first()){
                                 foreach($emprestimos as $emprestimo){
                                     $valor_emprestado += $emprestimo->valor_total;
@@ -88,7 +99,12 @@
                             <td>R$ {{inteiroParaReal($valor_recebido)}}</td>
                             <td>R$ {{inteiroParaReal($valor_comissao)}}</td>
                             <td>R$ {{inteiroParaReal($valor_em_aberto)}}</td>
-                            <td></td>
+                            <td>R$ {{inteiroParaReal($valor_retirada)}}</td>
+                            <td>
+                                @if(auth()->user()->perfil === 'admin')
+                                    <a href="{{route('painel.caixa.retirada', $corretor->id)}}" class="btn btn-danger"><i class="fa fa-arrow-down"></i>  Retirar Valor</a>
+                                @endif
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -105,6 +121,7 @@
                             <td><b>R$ {{inteiroParaReal($total_recebido)}}</b></td>
                             <td><b>R$ {{inteiroParaReal($total_comissao)}}</b></td>
                             <td><b>R$ {{inteiroParaReal($total_em_aberto)}}</b></td>
+                            <td><b>R$ {{inteiroParaReal($total_retirada)}}</b></td>
                             <td></td>
                         </tr>
                     @endif
