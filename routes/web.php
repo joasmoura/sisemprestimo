@@ -26,6 +26,9 @@ Route::get('/', function () {
 
 Route::name('painel.')->middleware('auth')->prefix('painel')->group(function () {
     Route::get('/', [PainelController::class, 'index'])->name('index');
+
+    Route::post('/usuarios/salvar-perfil', [UsuariosController::class, 'salvarPerfil'])->name('usuarios.salvarPerfil');
+    Route::get('/usuarios/perfil', [UsuariosController::class, 'perfil'])->name('usuarios.perfil');
     Route::get('/usuarios/logout', [UsuariosController::class, 'logout'])->name('usuarios.logout');
     Route::resource('/usuarios', UsuariosController::class);
     Route::resource('/clientes', ClientesController::class);

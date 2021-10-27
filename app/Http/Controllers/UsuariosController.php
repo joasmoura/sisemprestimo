@@ -24,6 +24,25 @@ class UsuariosController extends Controller
         return View('painel.usuarios.index', compact('corretores'));
     }
 
+    public function perfil(){
+        return View('painel.usuarios.perfil');
+    }
+
+    public function salvarPerfil(Request $request){
+        $user = auth()->user();
+
+        $user->name = $request->name;
+        if(!empty($request->password)){
+            $user->password = Hash::make($request->password);
+        }
+        $salvo =$user->save();
+
+        if($salvo){
+            return redirect()->back()->with('salvo', 'Dados atualizados com sucesso!');
+
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
